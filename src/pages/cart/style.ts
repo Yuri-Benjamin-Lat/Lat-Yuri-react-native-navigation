@@ -53,7 +53,6 @@ export const styles = StyleSheet.create({
   checkoutButton: { paddingHorizontal: 20, paddingVertical: 12, borderRadius: 6 },
   checkoutText: { color: "#fff", fontWeight: "bold" },
 
-  /* MODAL STYLES */
   modalOverlay: {
     flex: 1,
     backgroundColor: "rgba(0,0,0,0.5)",

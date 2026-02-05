@@ -17,10 +17,13 @@ export const styles = StyleSheet.create({
   bottomBar: { width: "100%", height: 80, paddingVertical: 12, paddingHorizontal: 40, flexDirection: "row", justifyContent: "flex-end", alignItems: "center", position: "absolute", bottom: 0 },
   checkoutButton: { paddingHorizontal: 20, paddingVertical: 12, borderRadius: 6 },
   checkoutButtonText: { fontWeight: "bold", textAlign: "center" },
+
   modalOverlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.5)", justifyContent: "center", alignItems: "center" },
   modalContainer: { width: width * 0.8, padding: 32, borderWidth: 0.5, borderRadius: 10, alignItems: "center" },
   modalTitle: { fontSize: 18, fontWeight: "700", marginBottom: 16 },
-  modalMessage: { fontSize: 16, marginBottom: 32, textAlign: "center" },
+  modalMessage: { fontSize: 16, marginBottom: 20, textAlign: "center" },
   modalButton: { paddingVertical: 10, paddingHorizontal: 24, borderRadius: 6 },
   modalButtonText: { fontWeight: "bold" },
+
+  successImage: { width: 120, height: 120 },
 });
