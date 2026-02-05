@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, View, Text, Image, Pressable } from "react-native";
-import { useTheme } from "../../../context/ThemeContext";
-import { useCart } from "../../../context/CartContext";
+import { useTheme } from "../../../../context/ThemeContext";
+import { useCart } from "../../../../context/CartContext";
 import { styles } from "./productModalStyle";
 
 type ProductModalProps = {

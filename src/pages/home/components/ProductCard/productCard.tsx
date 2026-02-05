@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, Pressable } from "react-native";
-import { useTheme } from "../../../context/ThemeContext";
-import { styles } from "./productsStyle";
+import { useTheme } from "../../../../context/ThemeContext";
+import { styles } from "./productCardStyle";
 
 type ProductCardProps = {
   name: string;

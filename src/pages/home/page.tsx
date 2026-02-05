@@ -3,9 +3,9 @@ import { View, FlatList, ImageBackground } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation/AppNavigator";
 import { useTheme } from "../../context/ThemeContext";
-import { products } from "../../shopData";
-import ProductCard from "./components/products";
-import ProductModal from "./components/productModal";
+import { products } from "../../data/shopData";
+import ProductCard from "./components/ProductCard/productCard";
+import ProductModal from "./components/ProductModal/productModal";
 import { styles } from "./style";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
