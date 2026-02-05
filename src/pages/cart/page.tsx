@@ -21,7 +21,6 @@ export default function Cart({ navigation }: Props) {
   const { cartItems, updateQuantity, removeFromCart } = useCart();
   const [showEmptyAlert, setShowEmptyAlert] = useState(false);
 
-  // helper to convert hex to rgba with opacity
   const hexToRgba = (hex: string, opacity: number) => {
     const r = parseInt(hex.slice(1, 3), 16);
     const g = parseInt(hex.slice(3, 5), 16);
@@ -73,7 +72,10 @@ export default function Cart({ navigation }: Props) {
           </View>
 
           <Pressable
-            style={[styles.removeButton, { backgroundColor: theme.accent, marginRight: 12 }]}
+            style={[
+              styles.removeButton,
+              { backgroundColor: theme.accent, marginRight: 12 },
+            ]}
             onPress={() => removeFromCart(item.id)}
           >
             <Text style={{ color: theme.background }}>Remove</Text>
@@ -106,7 +108,7 @@ export default function Cart({ navigation }: Props) {
               },
             ]}
           >
-            Your cart is empty
+            There's nothing here...
           </Text>
         ) : (
           <FlatList
@@ -143,21 +145,43 @@ export default function Cart({ navigation }: Props) {
         </Pressable>
       </View>
 
+      {/* EMPTY CART MODAL */}
       <Modal
         visible={showEmptyAlert}
         transparent
         animationType="fade"
         onRequestClose={() => setShowEmptyAlert(false)}
       >
-        <View style={styles.modalOverlay}>
-          <View style={[styles.modalContainer, { backgroundColor: hexToRgba(theme.background, 0.95), borderColor: theme.text }]}>
+        <View style={styles.modalOverlayCentered}>
+          <View
+            style={[
+              styles.modalContainer,
+              {
+                backgroundColor: hexToRgba(theme.background, 0.95),
+                borderColor: theme.text,
+              },
+            ]}
+          >
             <Text style={[styles.modalTitle, { color: theme.text }]}>Oops!</Text>
-            <Text style={[styles.modalMessage, { color: theme.text }]}>Can't check out an empty cart</Text>
+            <Text style={[styles.modalMessage, { color: theme.text }]}>
+              Can't check out an empty cart
+            </Text>
+
+            <Image
+              source={require("../../../assets/empty2.png")}
+              style={styles.emptyImage}
+              resizeMode="contain"
+            />
+
             <Pressable
               style={[styles.modalButton, { backgroundColor: theme.accent }]}
               onPress={() => setShowEmptyAlert(false)}
             >
-              <Text style={[styles.modalButtonText, { color: theme.background }]}>Okay</Text>
+              <Text
+                style={[styles.modalButtonText, { color: theme.background }]}
+              >
+                Okay
+              </Text>
             </Pressable>
           </View>
         </View>

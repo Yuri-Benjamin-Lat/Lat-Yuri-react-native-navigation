@@ -32,9 +32,23 @@ export const styles = StyleSheet.create({
   info: { flex: 1 },
   name: { fontSize: 16, fontWeight: "600" },
   price: { fontSize: 14, marginVertical: 6 },
-  rowBetween: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
-  quantityContainer: { flexDirection: "row", alignItems: "center", flexWrap: "nowrap" },
-  qtyButton: { borderWidth: 0.5, paddingHorizontal: 8, paddingVertical: 4, borderRadius: 4, marginRight: 6 },
+  rowBetween: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  quantityContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    flexWrap: "nowrap",
+  },
+  qtyButton: {
+    borderWidth: 0.5,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 4,
+    marginRight: 6,
+  },
   qtyText: { fontSize: 16 },
   removeButton: { paddingHorizontal: 8, paddingVertical: 4, borderRadius: 4 },
   bottomBar: {
@@ -50,15 +64,20 @@ export const styles = StyleSheet.create({
     position: "absolute",
   },
   total: { fontSize: 16, fontWeight: "600" },
-  checkoutButton: { paddingHorizontal: 20, paddingVertical: 12, borderRadius: 6 },
+  checkoutButton: {
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 6,
+  },
   checkoutText: { color: "#fff", fontWeight: "bold" },
 
-  modalOverlay: {
+  modalOverlayCentered: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
   },
+
   modalContainer: {
     width: width * 0.8,
     padding: 20,
@@ -66,6 +85,12 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
   },
+
+  emptyImage: {
+    width: 175,
+    height: 175,
+  },
+
   modalTitle: { fontSize: 18, fontWeight: "700", marginBottom: 8 },
   modalMessage: { fontSize: 16, marginBottom: 16, textAlign: "center" },
   modalButton: { paddingVertical: 10, paddingHorizontal: 24, borderRadius: 6 },
