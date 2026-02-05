@@ -7,8 +7,8 @@ type ProductCardProps = {
   name: string;
   price: number;
   image: any;
-  backgroundOpacity?: number; // optional prop to configure opacity (0 to 1)
-  onPress?: () => void;       // <-- added for modal click
+  backgroundOpacity?: number;
+  onPress?: () => void; 
 };
 
 export default function ProductCard({
@@ -20,7 +20,6 @@ export default function ProductCard({
 }: ProductCardProps) {
   const { theme } = useTheme();
 
-  // convert theme.background hex to rgba with opacity
   const getBackgroundWithOpacity = (hexColor: string, opacity: number) => {
     const r = parseInt(hexColor.slice(1, 3), 16);
     const g = parseInt(hexColor.slice(3, 5), 16);
@@ -37,7 +36,7 @@ export default function ProductCard({
           borderColor: theme.text,
         },
       ]}
-      onPress={onPress} // <-- open modal when pressed
+      onPress={onPress}
     >
       <Image source={image} style={styles.image} resizeMode="contain" />
       <Text style={[styles.name, { color: theme.text }]} numberOfLines={1}>

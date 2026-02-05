@@ -30,8 +30,8 @@ export default function ProductModal({
 
   const handleAddToCart = () => {
     addToCart({ id, name, price, image }, quantity);
-    onClose(); // close modal after adding
-    setQuantity(1); // reset quantity
+    onClose();
+    setQuantity(1);
   };
 
   return (
@@ -43,7 +43,6 @@ export default function ProductModal({
             { backgroundColor: theme.background, borderColor: theme.text },
           ]}
         >
-          {/* Close Button */}
           <Pressable
             style={[styles.closeButton, { backgroundColor: theme.text }]}
             onPress={onClose}
@@ -60,7 +59,6 @@ export default function ProductModal({
             {description}
           </Text>
 
-          {/* Quantity + Add to Cart */}
           <View style={styles.rowContainer}>
             <View style={styles.quantityContainer}>
               <Pressable

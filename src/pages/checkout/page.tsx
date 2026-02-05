@@ -2,11 +2,11 @@ import React from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
   FlatList,
   Image,
   ImageBackground,
   Alert,
+  Pressable,
 } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation/AppNavigator";
@@ -108,7 +108,7 @@ export default function Checkout({ navigation }: Props) {
           { backgroundColor: theme.background, borderTopColor: theme.text },
         ]}
       >
-        <TouchableOpacity
+        <Pressable
           style={[styles.checkoutButton, { backgroundColor: theme.accent }]}
           onPress={handleCheckout}
           disabled={cartItems.length === 0}
@@ -116,7 +116,7 @@ export default function Checkout({ navigation }: Props) {
           <Text style={[styles.checkoutButtonText, { color: theme.background }]}>
             Place Order
           </Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </ImageBackground>
   );

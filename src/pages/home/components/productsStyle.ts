@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   card: {
-    flex: 1, // occupy available column space
+    flex: 1,
     alignItems: "center",
     justifyContent: "flex-start",
     margin: 4,

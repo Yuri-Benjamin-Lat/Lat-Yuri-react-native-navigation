@@ -30,7 +30,6 @@ export default function AppNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        {/* Home Screen */}
         <Stack.Screen
           name="Home"
           component={Home}
@@ -57,7 +56,6 @@ export default function AppNavigator() {
           })}
         />
 
-        {/* Cart Screen */}
         <Stack.Screen
           name="Cart"
           component={Cart}
@@ -82,7 +80,6 @@ export default function AppNavigator() {
           })}
         />
 
-        {/* Checkout Screen */}
         <Stack.Screen
           name="Checkout"
           component={Checkout}

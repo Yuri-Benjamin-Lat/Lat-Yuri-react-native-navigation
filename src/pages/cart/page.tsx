@@ -2,11 +2,11 @@ import React from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
   FlatList,
   Image,
   ImageBackground,
   Alert,
+  Pressable,
 } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation/AppNavigator";
@@ -47,12 +47,12 @@ export default function Cart({ navigation }: Props) {
 
         <View style={styles.rowBetween}>
           <View style={styles.quantityContainer}>
-            <TouchableOpacity
+            <Pressable
               style={[styles.qtyButton, { backgroundColor: theme.text }]}
               onPress={() => updateQuantity(item.id, item.quantity - 1)}
             >
               <Text style={{ color: theme.background }}>-</Text>
-            </TouchableOpacity>
+            </Pressable>
 
             <Text
               style={[
@@ -63,23 +63,20 @@ export default function Cart({ navigation }: Props) {
               {item.quantity}
             </Text>
 
-            <TouchableOpacity
+            <Pressable
               style={[styles.qtyButton, { backgroundColor: theme.text }]}
               onPress={() => updateQuantity(item.id, item.quantity + 1)}
             >
               <Text style={{ color: theme.background }}>+</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
 
-          <TouchableOpacity
-            style={[
-              styles.removeButton,
-              { backgroundColor: theme.accent, marginRight: 12 },
-            ]}
+          <Pressable
+            style={[styles.removeButton, { backgroundColor: theme.accent, marginRight: 12 }]}
             onPress={() => removeFromCart(item.id)}
           >
             <Text style={{ color: theme.background }}>Remove</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
     </View>
@@ -132,7 +129,7 @@ export default function Cart({ navigation }: Props) {
       >
         <Text style={[styles.total, { color: theme.text }]}>{`Total: ₱ ${total}`}</Text>
 
-        <TouchableOpacity
+        <Pressable
           style={[styles.checkoutButton, { backgroundColor: theme.accent }]}
           onPress={() => {
             if (cartItems.length === 0) {
@@ -143,7 +140,7 @@ export default function Cart({ navigation }: Props) {
           }}
         >
           <Text style={styles.checkoutText}>Checkout</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </ImageBackground>
   );
