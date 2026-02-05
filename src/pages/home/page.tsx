@@ -1,14 +1,29 @@
-import React from "react";
-import { View, Text, ImageBackground, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, FlatList, ImageBackground } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../navigation/AppNavigator"; 
+import { RootStackParamList } from "../../navigation/AppNavigator";
 import { useTheme } from "../../context/ThemeContext";
-import { styles } from "./style"; // import the styles
+import { styles } from "./style";
+import { products } from "../../shopData";
+import ProductCard from "./components/products";
+import ProductModal from "./components/productModal";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
 export default function Home({ navigation }: Props) {
   const { theme } = useTheme();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+
+  const openModal = (product: any) => {
+    setSelectedProduct(product);
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+    setSelectedProduct(null);
+  };
 
   return (
     <ImageBackground
@@ -17,8 +32,34 @@ export default function Home({ navigation }: Props) {
       resizeMode="cover"
     >
       <View style={styles.overlay}>
-        <Text style={{ color: theme.text, fontSize: 20 }}>Home Page</Text>
+        <FlatList
+          data={products}
+          keyExtractor={(item) => item.id}
+          numColumns={2}
+          columnWrapperStyle={{ justifyContent: "space-between" }}
+          contentContainerStyle={{ paddingHorizontal: 8, paddingVertical: 8 }}
+          renderItem={({ item }) => (
+            <ProductCard
+              name={item.name}
+              price={item.price}
+              image={item.image}
+              onPress={() => openModal(item)} // <-- open modal on click
+            />
+          )}
+        />
       </View>
+
+      {selectedProduct && (
+        <ProductModal
+          visible={modalVisible}
+          onClose={closeModal}
+          id={selectedProduct.id}
+          name={selectedProduct.name}
+          price={selectedProduct.price}
+          description={selectedProduct.description}
+          image={selectedProduct.image}
+        />
+      )}
     </ImageBackground>
   );
 }

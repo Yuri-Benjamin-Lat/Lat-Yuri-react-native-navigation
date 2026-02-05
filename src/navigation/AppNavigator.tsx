@@ -51,7 +51,7 @@ export default function AppNavigator() {
                     color: theme.text,
                     fontSize: 20,
                     fontWeight: "900",
-                    paddingRight: 10
+                    paddingRight: 10,
                   }}
                 >
                   Dandy's Trinkets
@@ -62,7 +62,11 @@ export default function AppNavigator() {
                 >
                   <Image
                     source={require("../../assets/cart_icon.png")}
-                    style={{ width: 28, height: 28 }}
+                    style={{ 
+                      width: 28,
+                      height: 28, 
+                      
+                    }}
                     resizeMode="contain"
                   />
                 </Pressable>
