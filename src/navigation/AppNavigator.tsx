@@ -125,10 +125,40 @@ export default function AppNavigator() {
           name="Checkout"
           component={Checkout}
           options={({ navigation }) => ({
-            headerTitle: () => renderTitle("Checkout"),
+            headerLeft: () => null,          // hide default back button (icon)
+            headerBackVisible: false,        // remove iOS back space entirely
+
+            headerTitle: () => (
+              <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                {/* Absolute Back Button */}
+                <Pressable
+                  style={{
+                    position: "absolute",
+                    left: 0,
+                    paddingLeft: 12,
+                    height: "100%",
+                    justifyContent: "center",
+                  }}
+                  onPress={() => navigation.goBack()}
+                >
+                  <Ionicons name="arrow-back" size={24} color={theme.text} />
+                </Pressable>
+
+                {/* Centered Title */}
+                <Text
+                  style={{
+                    color: theme.text,
+                    fontSize: 20,
+                    fontWeight: "900",
+                  }}
+                >
+                  Check out
+                </Text>
+              </View>
+            ),
+
             headerStyle: { backgroundColor: theme.background },
-            headerTintColor: theme.text, // arrow color
-            headerBackTitleVisible: false, // <-- removes "Back" label
+            headerTintColor: theme.text,
           })}
         />
       </Stack.Navigator>

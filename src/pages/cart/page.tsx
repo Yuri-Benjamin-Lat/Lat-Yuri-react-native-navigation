@@ -102,7 +102,7 @@ export default function Cart({ navigation }: Props) {
       {/* SCROLLABLE AREA */}
       <View style={{ flex: 1, padding: 6 }}>
         {cartItems.length === 0 ? (
-          <Text style={{ color: theme.text, textAlign: "center", marginTop: 20 }}>
+          <Text style={[styles.generalText, { backgroundColor: theme.background, borderColor: theme.text, color: theme.text, textAlign: "center", marginTop: 20 }]}>
             Your cart is empty
           </Text>
         ) : (
@@ -156,6 +156,13 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     marginBottom: 12,
     textAlign: "center",
+  },
+  generalText: {
+    fontSize: 16,
+    marginHorizontal: 100,
+    padding: 12,
+    borderWidth: 0.5,
+    borderRadius: 8,
   },
   itemContainer: {
     flexDirection: "row",
