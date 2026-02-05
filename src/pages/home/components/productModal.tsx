@@ -73,17 +73,27 @@ export default function ProductModal({
             {/* Quantity Selector */}
             <View style={styles.quantityContainer}>
               <Pressable
-                style={styles.qtyButton}
-                onPress={() => setQuantity((q) => Math.max(1, q - 1))}
+                style={[
+                  styles.qtyButton,
+                  { backgroundColor: theme.text }
+                ]}
+                onPress={() => setQuantity(q => Math.max(1, q - 1))}
               >
-                <Text style={{ color: "#fff" }}>-</Text>
+                <Text style={{ color: theme.background, fontSize: 32 }}>-</Text>
               </Pressable>
-              <Text style={[styles.qtyText, { color: theme.text }]}>{quantity}</Text>
+
+              <Text style={[styles.qtyText, { color: theme.text, fontSize: 20 }]}>
+                {quantity}
+              </Text>
+
               <Pressable
-                style={styles.qtyButton}
-                onPress={() => setQuantity((q) => q + 1)}
+                style={[
+                  styles.qtyButton,
+                  { backgroundColor: theme.text }
+                ]}
+                onPress={() => setQuantity(q => q + 1)}
               >
-                <Text style={{ color: "#fff" }}>+</Text>
+                <Text style={{ color: theme.background, fontSize: 32 }}>+</Text>
               </Pressable>
             </View>
 
@@ -133,7 +143,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   price: { fontSize: 18, marginBottom: 8 },
-  description: { fontSize: 14, textAlign: "center", marginVertical: 16, marginBottom: 24 },
+  description: { fontSize: 14, textAlign: "center", marginVertical: 16, marginHorizontal: 20, marginBottom: 24 },
 
   // Row for quantity + add to cart
   rowContainer: {
@@ -150,10 +160,10 @@ const styles = StyleSheet.create({
   qtyButton: {
     backgroundColor: "#007AFF",
     paddingHorizontal: 12,
-    paddingVertical: 6,
+    paddingVertical: 1,
     borderRadius: 6,
   },
-  qtyText: { fontSize: 16, marginHorizontal: 12 },
+  qtyText: { fontSize: 16, marginHorizontal: 16 },
 
   addButton: {
     paddingVertical: 10,
