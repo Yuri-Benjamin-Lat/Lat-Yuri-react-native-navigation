@@ -1,0 +1,44 @@
+import React, { createContext, useContext, useState } from "react";
+
+type Theme = {
+  background: string;
+  text: string;
+};
+
+const lightTheme: Theme = {
+  background: "#FFFFFF",
+  text: "#000000",
+};
+
+const darkTheme: Theme = {
+  background: "#000000",
+  text: "#FFFFFF",
+};
+
+type ThemeContextType = {
+  theme: Theme;
+  isDark: boolean;
+  toggleTheme: () => void;
+};
+
+const ThemeContext = createContext<ThemeContextType>({
+  theme: lightTheme,
+  isDark: false,
+  toggleTheme: () => {},
+});
+
+export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [isDark, setIsDark] = useState(false);
+
+  const toggleTheme = () => {
+    setIsDark(prev => !prev);
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme: isDark ? darkTheme : lightTheme, isDark, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export const useTheme = () => useContext(ThemeContext);
