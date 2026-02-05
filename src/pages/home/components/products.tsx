@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, Pressable } from "react-native";
+import { View, Text, Image, Pressable } from "react-native";
 import { useTheme } from "../../../context/ThemeContext";
+import { styles } from "./productsStyle";
 
 type ProductCardProps = {
   name: string;
@@ -14,7 +15,7 @@ export default function ProductCard({
   name,
   price,
   image,
-  backgroundOpacity = 0.80,
+  backgroundOpacity = 0.85,
   onPress,
 }: ProductCardProps) {
   const { theme } = useTheme();
@@ -42,39 +43,7 @@ export default function ProductCard({
       <Text style={[styles.name, { color: theme.text }]} numberOfLines={1}>
         {name}
       </Text>
-      <Text style={[styles.price, { color: theme.text }]}>₱ {price}</Text>
+      <Text style={[styles.price, { color: theme.text }]}>{`₱ ${price}`}</Text>
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  card: {
-    flex: 1,                   // occupy available column space
-    alignItems: "center",
-    justifyContent: "flex-start",
-    margin: 4,
-    padding: 19,
-    borderRadius: 8,
-    elevation: 2,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    borderWidth: 0.5,
-  },
-  image: {
-    width: 80,
-    height: 80,
-    marginBottom: 10,
-  },
-  name: {
-    fontSize: 16,
-    fontWeight: "600",
-    textAlign: "center",
-    paddingTop: 8,
-  },
-  price: {
-    fontSize: 14,
-    marginTop: 4,
-  },
-});

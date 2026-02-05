@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   FlatList,
   Image,
-  StyleSheet,
   ImageBackground,
   Alert,
 } from "react-native";
@@ -13,6 +12,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation/AppNavigator";
 import { useTheme } from "../../context/ThemeContext";
 import { useCart, CartItem } from "../../context/CartContext";
+import { styles } from "./style";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Checkout">;
 
@@ -35,7 +35,6 @@ export default function Checkout({ navigation }: Props) {
 
   const renderItem = ({ item }: { item: CartItem }) => (
     <View style={styles.receiptRow}>
-      {/* Tiny icon next to name */}
       <Image source={item.image} style={styles.itemIcon} resizeMode="contain" />
       <Text style={[styles.itemName, { color: theme.text }]}>{item.name}</Text>
       <Text style={[styles.itemQty, { color: theme.text }]}>
@@ -74,15 +73,13 @@ export default function Checkout({ navigation }: Props) {
 
   return (
     <ImageBackground
-      source={require("../../../assets/checkoutbg2.png")}
-      style={{ flex: 1, backgroundColor: theme.background }}
+      source={require("../../../assets/background3.png")}
+      style={[styles.background, { backgroundColor: theme.background }]}
       resizeMode="cover"
     >
-      <View style={{ flex: 1, padding: 12 }}>
+      <View style={styles.container}>
         {cartItems.length === 0 ? (
-          <Text style={{ color: theme.text, textAlign: "center", marginTop: 20 }}>
-            Your cart is empty
-          </Text>
+          <Text style={[styles.emptyText, { color: theme.text }]}></Text>
         ) : (
           <View
             style={[
@@ -94,11 +91,11 @@ export default function Checkout({ navigation }: Props) {
               data={cartItems}
               keyExtractor={(item, index) => item.id + index.toString()}
               renderItem={renderItem}
-              scrollEnabled={false} // no internal scroll
+              scrollEnabled={false}
             />
             <View style={styles.receiptTotalRow}>
-              <Text style={[styles.totalText, { color: theme.text }]}>Total:</Text>
-              <Text style={[styles.totalText, { color: theme.text }]}>₱ {total}</Text>
+              <Text style={[styles.totalText, { color: theme.accent }]}>Total:</Text>
+              <Text style={[styles.totalText, { color: theme.accent }]}>₱ {total}</Text>
             </View>
           </View>
         )}
@@ -108,20 +105,15 @@ export default function Checkout({ navigation }: Props) {
       <View
         style={[
           styles.bottomBar,
-          {
-            backgroundColor: theme.background,
-            borderTopColor: theme.text,
-            position: "absolute",
-            bottom: 0,
-          },
+          { backgroundColor: theme.background, borderTopColor: theme.text },
         ]}
       >
         <TouchableOpacity
-          style={[styles.checkoutButton, { backgroundColor: theme.text }]}
+          style={[styles.checkoutButton, { backgroundColor: theme.accent }]}
           onPress={handleCheckout}
           disabled={cartItems.length === 0}
         >
-          <Text style={{ color: theme.background, fontWeight: "bold" }}>
+          <Text style={[styles.checkoutButtonText, { color: theme.background }]}>
             Place Order
           </Text>
         </TouchableOpacity>
@@ -129,56 +121,3 @@ export default function Checkout({ navigation }: Props) {
     </ImageBackground>
   );
 }
-
-const styles = StyleSheet.create({
-  receiptContainer: {
-    borderWidth: 0.5,
-    borderRadius: 8,
-    padding: 12,
-    margin: 4
-  },
-  receiptRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingVertical: 6,
-    borderBottomWidth: 0.3,
-    borderColor: "#aaa",
-  },
-  itemIcon: {
-    width: 24,
-    height: 24,
-    marginRight: 6,
-    alignSelf: "center",
-  },
-  itemName: { flex: 2, fontSize: 16 },
-  itemQty: { flex: 1, fontSize: 16, textAlign: "center" },
-  itemTotal: { flex: 1, fontSize: 16, textAlign: "right" },
-  receiptTotalRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingTop: 10,
-    borderTopWidth: 0.5,
-    borderColor: "#aaa",
-  },
-  totalText: {
-    fontSize: 18,
-    fontWeight: "600",
-  },
-  bottomBar: {
-    bottom: 0,
-    width: "100%",
-    height: 80,
-    padding: 12,
-    paddingHorizontal: 32,
-    paddingLeft: 40,
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "center",
-  },
-  checkoutButton: {
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    borderRadius: 6,
-  },
-});

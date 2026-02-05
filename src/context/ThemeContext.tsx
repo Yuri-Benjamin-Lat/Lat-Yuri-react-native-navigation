@@ -3,16 +3,19 @@ import React, { createContext, useContext, useState } from "react";
 type Theme = {
   background: string;
   text: string;
+  accent: string;
 };
 
 const lightTheme: Theme = {
-  background: "#FFFFFF",
-  text: "#000000",
+  background: "#f8f4e6",
+  text: "#060030",
+  accent: "#e9462a",
 };
 
 const darkTheme: Theme = {
-  background: "#000000",
-  text: "#FFFFFF",
+  background: "#000c18",
+  text: "#f8f4e6",
+  accent: "#e76616",
 };
 
 type ThemeContextType = {

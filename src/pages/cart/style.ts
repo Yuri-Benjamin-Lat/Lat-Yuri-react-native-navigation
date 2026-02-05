@@ -1,33 +1,57 @@
 import { StyleSheet } from "react-native";
 
+export const getBackgroundStyle = (bgColor: string) => ({ 
+  flex: 1, 
+  backgroundColor: bgColor 
+});
+
 export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
+  container: { flex: 1, padding: 6 },
+  flatListContent: { paddingBottom: 100 },
+  generalText: {
+    fontSize: 16,
+    marginHorizontal: 90,
+    padding: 20,
+    borderWidth: 0.5,
+    borderRadius: 8,
+    textAlign: "center",
+    marginTop: 20,
   },
-  bottomBar: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 70,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    backgroundColor: "#f1f1f1",
-    borderTopWidth: 1,
-    borderTopColor: "#ccc",
+  itemContainer: {
     flexDirection: "row",
-    justifyContent: "flex-end", // push button to the right
+    borderWidth: 0.5,
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 4,
+    alignItems: "center",
+    margin: 4,
+  },
+  image: { width: 80, height: 80, marginLeft: 8, marginRight: 20 },
+  info: { flex: 1 },
+  name: { fontSize: 16, fontWeight: "600" },
+  price: { fontSize: 14, marginVertical: 6 },
+  rowBetween: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
   },
-  checkoutButton: {
-    backgroundColor: "#007bff",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 8,
+  quantityContainer: { flexDirection: "row", alignItems: "center", flexWrap: "nowrap" },
+  qtyButton: { borderWidth: 0.5, paddingHorizontal: 8, paddingVertical: 4, borderRadius: 4, marginRight: 6 },
+  qtyText: { fontSize: 16 },
+  removeButton: { paddingHorizontal: 8, paddingVertical: 4, borderRadius: 4 },
+  bottomBar: {
+    bottom: 0,
+    width: "100%",
+    height: 80,
+    padding: 12,
+    paddingHorizontal: 32,
+    paddingLeft: 40,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    position: "absolute",
   },
-  buttonText: {
-    color: "#fff",
-    fontWeight: "bold",
-  },
+  total: { fontSize: 16, fontWeight: "600" },
+  checkoutButton: { paddingHorizontal: 20, paddingVertical: 12, borderRadius: 6 },
+  checkoutText: { color: "#fff", fontWeight: "bold" },
 });

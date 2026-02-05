@@ -8,4 +8,11 @@ export const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
   },
+  columnWrapper: {
+    justifyContent: "space-between",
+  },
+  flatListContent: {
+    paddingHorizontal: 8,
+    paddingVertical: 8,
+  },
 });

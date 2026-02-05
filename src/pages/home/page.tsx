@@ -3,10 +3,10 @@ import { View, FlatList, ImageBackground } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation/AppNavigator";
 import { useTheme } from "../../context/ThemeContext";
-import { styles } from "./style";
 import { products } from "../../shopData";
 import ProductCard from "./components/products";
 import ProductModal from "./components/productModal";
+import { styles } from "./style";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
@@ -36,14 +36,14 @@ export default function Home({ navigation }: Props) {
           data={products}
           keyExtractor={(item) => item.id}
           numColumns={2}
-          columnWrapperStyle={{ justifyContent: "space-between" }}
-          contentContainerStyle={{ paddingHorizontal: 8, paddingVertical: 8 }}
+          columnWrapperStyle={styles.columnWrapper}
+          contentContainerStyle={styles.flatListContent}
           renderItem={({ item }) => (
             <ProductCard
               name={item.name}
               price={item.price}
               image={item.image}
-              onPress={() => openModal(item)} // <-- open modal on click
+              onPress={() => openModal(item)}
             />
           )}
         />

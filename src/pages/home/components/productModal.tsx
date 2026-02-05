@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Modal, View, Text, Image, StyleSheet, Pressable } from "react-native";
+import { Modal, View, Text, Image, Pressable } from "react-native";
 import { useTheme } from "../../../context/ThemeContext";
 import { useCart } from "../../../context/CartContext";
+import { styles } from "./productModalStyle";
 
 type ProductModalProps = {
   visible: boolean;
@@ -42,21 +43,12 @@ export default function ProductModal({
             { backgroundColor: theme.background, borderColor: theme.text },
           ]}
         >
-
           {/* Close Button */}
           <Pressable
             style={[styles.closeButton, { backgroundColor: theme.text }]}
             onPress={onClose}
           >
-            <Text
-              style={{
-                color: theme.background,
-                fontWeight: "600",
-                fontSize: 20,
-                lineHeight: 20, // makes the text perfectly vertically centered
-                textAlign: "center",
-              }}
-            >
+            <Text style={[styles.closeButtonText, { color: theme.background }]}>
               x
             </Text>
           </Pressable>
@@ -68,114 +60,39 @@ export default function ProductModal({
             {description}
           </Text>
 
-          {/* Quantity + Add to Cart in one line, centered */}
+          {/* Quantity + Add to Cart */}
           <View style={styles.rowContainer}>
-            {/* Quantity Selector */}
             <View style={styles.quantityContainer}>
               <Pressable
-                style={[
-                  styles.qtyButton,
-                  { backgroundColor: theme.text }
-                ]}
+                style={[styles.qtyButton, { backgroundColor: theme.text }]}
                 onPress={() => setQuantity(q => Math.max(1, q - 1))}
               >
-                <Text style={{ color: theme.background, fontSize: 32 }}>-</Text>
+                <Text style={[styles.qtyButtonText, { color: theme.background }]}>-</Text>
               </Pressable>
 
-              <Text style={[styles.qtyText, { color: theme.text, fontSize: 20 }]}>
-                {quantity}
-              </Text>
+              <Text style={[styles.qtyText, { color: theme.text }]}>{quantity}</Text>
 
               <Pressable
-                style={[
-                  styles.qtyButton,
-                  { backgroundColor: theme.text }
-                ]}
+                style={[styles.qtyButton, { backgroundColor: theme.text }]}
                 onPress={() => setQuantity(q => q + 1)}
               >
-                <Text style={{ color: theme.background, fontSize: 32 }}>+</Text>
+                <Text style={[styles.qtyButtonText, { color: theme.background }]}>+</Text>
               </Pressable>
             </View>
 
-            {/* Add some space between quantity and button */}
-            <View style={{ width: 32 }} />
+            <View style={styles.spacer} />
 
-            {/* Add to Cart Button */}
             <Pressable
-              style={[styles.addButton, { backgroundColor: theme.text }]}
+              style={[styles.addButton, { backgroundColor: theme.accent }]}
               onPress={handleAddToCart}
             >
-              <Text style={{ color: theme.background, fontWeight: "600" }}>
+              <Text style={[styles.addButtonText, { color: theme.background }]}>
                 Add to Cart
               </Text>
             </Pressable>
           </View>
-
         </View>
       </View>
     </Modal>
   );
 }
-
-const styles = StyleSheet.create({
-  modalBackground: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modalContainer: {
-    width: "90%",
-    borderRadius: 12,
-    padding: 20,
-    borderWidth: 0.5,
-    alignItems: "center",
-  },
-  image: {
-    width: 175,
-    height: 175,
-    marginVertical: 16,
-  },
-  name: {
-    fontSize: 20,
-    fontWeight: "700",
-    textAlign: "center",
-    marginBottom: 8,
-  },
-  price: { fontSize: 18, marginBottom: 8 },
-  description: { fontSize: 14, textAlign: "center", marginVertical: 16, marginHorizontal: 20, marginBottom: 24 },
-
-  // Row for quantity + add to cart
-  rowContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center", // CENTER everything
-    marginBottom: 16,
-  },
-
-  quantityContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  qtyButton: {
-    backgroundColor: "#007AFF",
-    paddingHorizontal: 12,
-    paddingVertical: 1,
-    borderRadius: 6,
-  },
-  qtyText: { fontSize: 16, marginHorizontal: 16 },
-
-  addButton: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-  },
-  closeButton: {
-    position: "absolute",
-    top: 16,
-    left: 16,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 8,
-  },
-});

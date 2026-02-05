@@ -9,14 +9,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Cart from './src/pages/cart/page';
 
-/** import { CartProvider } from './store/context/CartContext'; **/
-/** import { ThemeProvider, useTheme } from './store/context/ThemeContext'; **/
-
 export default function App() {
   return (
     <ThemeProvider>
       <CartProvider>
-      <AppNavigator />
+        <AppNavigator />
       </CartProvider>
     </ThemeProvider>
   );

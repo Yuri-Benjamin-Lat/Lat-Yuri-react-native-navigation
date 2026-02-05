@@ -1,5 +1,10 @@
 import React from "react";
-import { View, Text, StyleSheet, Button, Pressable, Image } from "react-native";
+import {
+  View,
+  Text,
+  Pressable,
+  Image,
+} from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { useTheme } from "../context/ThemeContext";
@@ -9,6 +14,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Home from "../pages/home/page";
 import Cart from "../pages/cart/page";
 import Checkout from "../pages/checkout/page";
+import { styles } from "./AppNavigatorStyle";
 
 export type RootStackParamList = {
   Home: undefined;
@@ -21,142 +27,81 @@ const Stack = createNativeStackNavigator<any>();
 export default function AppNavigator() {
   const { theme } = useTheme();
 
-  const renderTitle = (title: string) => (
-    <View style={{ flexDirection: "row", alignItems: "center" }}>
-      <Text style={{ color: theme.text, fontSize: 18, fontWeight: "bold" }}>
-        {title}{" "}
-      </Text>
-    </View>
-  );
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
+        {/* Home Screen */}
         <Stack.Screen
           name="Home"
           component={Home}
           options={({ navigation }) => ({
             headerTitle: () => (
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
+              <View style={styles.homeHeaderContainer}>
                 <ThemeToggleButton />
-                <Text
-                  style={{
-                    color: theme.text,
-                    fontSize: 20,
-                    fontWeight: "900",
-                    paddingRight: 10,
-                  }}
-                >
+                <Text style={[styles.homeHeaderText, { color: theme.text }]}>
                   Dandy's Trinkets
                 </Text>
                 <Pressable
                   onPress={() => navigation.navigate("Cart")}
-                  style={{ padding: 5 }}
+                  style={styles.cartButton}
                 >
                   <Image
                     source={require("../../assets/cart_icon.png")}
-                    style={{
-                      width: 28,
-                      height: 28,
-
-                    }}
+                    style={styles.cartIcon}
                     resizeMode="contain"
                   />
                 </Pressable>
               </View>
             ),
-
             headerStyle: { backgroundColor: theme.background },
-            /* headerTintColor: theme.text, */
           })}
         />
 
+        {/* Cart Screen */}
         <Stack.Screen
           name="Cart"
           component={Cart}
           options={({ navigation }) => ({
-            headerLeft: () => null,          // hide default back button (icon)
-            headerBackVisible: false,        // remove iOS back space entirely
-
+            headerLeft: () => null,
+            headerBackVisible: false,
             headerTitle: () => (
-              <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-                {/* Absolute Back Button */}
+              <View style={styles.centerHeaderContainer}>
                 <Pressable
-                  style={{
-                    position: "absolute",
-                    left: 0,
-                    paddingLeft: 12,
-                    height: "100%",
-                    justifyContent: "center",
-                  }}
+                  style={styles.backButtonContainer}
                   onPress={() => navigation.goBack()}
                 >
                   <Ionicons name="arrow-back" size={24} color={theme.text} />
                 </Pressable>
-
-                {/* Centered Title */}
-                <Text
-                  style={{
-                    color: theme.text,
-                    fontSize: 20,
-                    fontWeight: "900",
-                  }}
-                >
-                  Cart
+                <Text style={[styles.centerHeaderText, { color: theme.text }]}>
+                  Shopping Cart
                 </Text>
               </View>
             ),
-
             headerStyle: { backgroundColor: theme.background },
             headerTintColor: theme.text,
           })}
         />
 
-
-
+        {/* Checkout Screen */}
         <Stack.Screen
           name="Checkout"
           component={Checkout}
           options={({ navigation }) => ({
-            headerLeft: () => null,          // hide default back button (icon)
-            headerBackVisible: false,        // remove iOS back space entirely
-
+            headerLeft: () => null,
+            headerBackVisible: false,
             headerTitle: () => (
-              <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-                {/* Absolute Back Button */}
+              <View style={styles.centerHeaderContainer}>
                 <Pressable
-                  style={{
-                    position: "absolute",
-                    left: 0,
-                    paddingLeft: 12,
-                    height: "100%",
-                    justifyContent: "center",
-                  }}
+                  style={styles.backButtonContainer}
                   onPress={() => navigation.goBack()}
                 >
                   <Ionicons name="arrow-back" size={24} color={theme.text} />
                 </Pressable>
-
-                {/* Centered Title */}
-                <Text
-                  style={{
-                    color: theme.text,
-                    fontSize: 20,
-                    fontWeight: "900",
-                  }}
-                >
-                  Check out
+                <Text style={[styles.centerHeaderText, { color: theme.text }]}>
+                  Order Summary
                 </Text>
               </View>
             ),
-
             headerStyle: { backgroundColor: theme.background },
             headerTintColor: theme.text,
           })}
