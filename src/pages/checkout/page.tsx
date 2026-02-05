@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   FlatList,
   Image,
   ImageBackground,
-  Alert,
   Pressable,
+  Modal,
 } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation/AppNavigator";
@@ -19,6 +19,9 @@ type Props = NativeStackScreenProps<RootStackParamList, "Checkout">;
 export default function Checkout({ navigation }: Props) {
   const { theme } = useTheme();
   const { cartItems, clearCart } = useCart();
+
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   // helper to convert hex to rgba with opacity
   const hexToRgba = (hex: string, opacity: number) => {
@@ -47,28 +50,17 @@ export default function Checkout({ navigation }: Props) {
   );
 
   const handleCheckout = () => {
-    if (cartItems.length === 0) return;
+    if (cartItems.length === 0) {
+      setShowConfirmModal(true); // Empty cart alert
+      return;
+    }
+    setShowConfirmModal(true); // Show confirm modal
+  };
 
-    Alert.alert(
-      "Confirm Checkout",
-      "Are you sure you want to place this order?",
-      [
-        { text: "Cancel", style: "cancel" },
-        {
-          text: "Confirm",
-          onPress: () => {
-            clearCart();
-            Alert.alert("Success", "Checkout successful!", [
-              {
-                text: "Okay",
-                onPress: () =>
-                  navigation.reset({ index: 0, routes: [{ name: "Home" }] }),
-              },
-            ]);
-          },
-        },
-      ]
-    );
+  const confirmOrder = () => {
+    setShowConfirmModal(false);
+    clearCart();
+    setShowSuccessModal(true);
   };
 
   return (
@@ -101,12 +93,8 @@ export default function Checkout({ navigation }: Props) {
         )}
       </View>
 
-      {/* BOTTOM BAR */}
       <View
-        style={[
-          styles.bottomBar,
-          { backgroundColor: theme.background, borderTopColor: theme.text },
-        ]}
+        style={[styles.bottomBar, { backgroundColor: theme.background, borderTopColor: theme.text }]}
       >
         <Pressable
           style={[styles.checkoutButton, { backgroundColor: theme.accent }]}
@@ -118,6 +106,67 @@ export default function Checkout({ navigation }: Props) {
           </Text>
         </Pressable>
       </View>
+
+      <Modal
+        visible={showConfirmModal}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setShowConfirmModal(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={[styles.modalContainer, { backgroundColor: hexToRgba(theme.background, 0.95), borderColor: theme.text }]}>
+            <Text style={[styles.modalTitle, { color: theme.text }]}>
+              {cartItems.length === 0 ? "Oops!" : "Confirm Checkout"}
+            </Text>
+            <Text style={[styles.modalMessage, { color: theme.text }]}>
+              {cartItems.length === 0
+                ? "Can't check out an empty cart"
+                : "Are you sure you want to place this order?"}
+            </Text>
+            <View style={{ flexDirection: "row" }}>
+              {cartItems.length > 0 && (
+                <Pressable
+                  style={[styles.modalButton, { backgroundColor: theme.text, marginRight: 32 }]}
+                  onPress={() => setShowConfirmModal(false)}
+                >
+                  <Text style={[styles.modalButtonText, { color: theme.background }]}>Cancel</Text>
+                </Pressable>
+              )}
+              <Pressable
+                style={[styles.modalButton, { backgroundColor: theme.accent }]}
+                onPress={cartItems.length === 0 ? () => setShowConfirmModal(false) : confirmOrder}
+              >
+                <Text style={[styles.modalButtonText, { color: theme.background }]}>
+                  {cartItems.length === 0 ? "Okay" : "Confirm"}
+                </Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal
+        visible={showSuccessModal}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setShowSuccessModal(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={[styles.modalContainer, { backgroundColor: hexToRgba(theme.background, 0.95), borderColor: theme.text }]}>
+            <Text style={[styles.modalTitle, { color: theme.text }]}>Success</Text>
+            <Text style={[styles.modalMessage, { color: theme.text }]}>Checkout successful!</Text>
+            <Pressable
+              style={[styles.modalButton, { backgroundColor: theme.accent }]}
+              onPress={() => {
+                setShowSuccessModal(false);
+                navigation.reset({ index: 0, routes: [{ name: "Home" }] });
+              }}
+            >
+              <Text style={[styles.modalButtonText, { color: theme.background }]}>Okay</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </ImageBackground>
   );
 }

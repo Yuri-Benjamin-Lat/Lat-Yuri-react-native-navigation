@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   FlatList,
   Image,
   ImageBackground,
-  Alert,
   Pressable,
+  Modal,
 } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation/AppNavigator";
@@ -19,6 +19,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "Cart">;
 export default function Cart({ navigation }: Props) {
   const { theme } = useTheme();
   const { cartItems, updateQuantity, removeFromCart } = useCart();
+  const [showEmptyAlert, setShowEmptyAlert] = useState(false);
 
   // helper to convert hex to rgba with opacity
   const hexToRgba = (hex: string, opacity: number) => {
@@ -117,7 +118,6 @@ export default function Cart({ navigation }: Props) {
         )}
       </View>
 
-      {/* BOTTOM BAR FIXED */}
       <View
         style={[
           styles.bottomBar,
@@ -133,7 +133,7 @@ export default function Cart({ navigation }: Props) {
           style={[styles.checkoutButton, { backgroundColor: theme.accent }]}
           onPress={() => {
             if (cartItems.length === 0) {
-              Alert.alert("Oops!", "Can't check out an empty cart");
+              setShowEmptyAlert(true);
               return;
             }
             navigation.navigate("Checkout");
@@ -142,6 +142,26 @@ export default function Cart({ navigation }: Props) {
           <Text style={styles.checkoutText}>Checkout</Text>
         </Pressable>
       </View>
+
+      <Modal
+        visible={showEmptyAlert}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setShowEmptyAlert(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={[styles.modalContainer, { backgroundColor: hexToRgba(theme.background, 0.95), borderColor: theme.text }]}>
+            <Text style={[styles.modalTitle, { color: theme.text }]}>Oops!</Text>
+            <Text style={[styles.modalMessage, { color: theme.text }]}>Can't check out an empty cart</Text>
+            <Pressable
+              style={[styles.modalButton, { backgroundColor: theme.accent }]}
+              onPress={() => setShowEmptyAlert(false)}
+            >
+              <Text style={[styles.modalButtonText, { color: theme.background }]}>Okay</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </ImageBackground>
   );
 }
