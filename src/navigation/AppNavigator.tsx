@@ -10,6 +10,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useTheme } from "../context/ThemeContext";
 import ThemeToggleButton from "../context/ThemeToggleButton/index";
 import { Ionicons } from "@expo/vector-icons";
+import { StatusBar } from "react-native";
 
 import Home from "../pages/home/page";
 import Cart from "../pages/cart/page";

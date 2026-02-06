@@ -98,19 +98,29 @@ export default function Cart({ navigation }: Props) {
     >
       <View style={styles.container}>
         {cartItems.length === 0 ? (
-          <Text
-            style={[
-              styles.generalText,
-              {
-                backgroundColor: hexToRgba(theme.background, 0.8),
-                borderColor: theme.text,
-                color: theme.text,
-              },
-            ]}
-          >
-            There's nothing here...
-          </Text>
+          <View style={styles.emptyWrapper}>
+            <View
+              style={[
+                styles.generalText,
+                {
+                  backgroundColor: hexToRgba(theme.background, 0.8),
+                  borderColor: theme.text,
+                },
+              ]}
+            >
+              <Image
+                source={require("../../../assets/Tastro.webp")}
+                style={styles.emptyImageSmall}
+                resizeMode="contain"
+              />
+
+              <Text style={{ color: theme.text, marginTop: 20, fontSize: 16 }}>
+                There's nothing here...
+              </Text>
+            </View>
+          </View>
         ) : (
+
           <FlatList
             data={cartItems}
             keyExtractor={(item, index) => item.id + index.toString()}
@@ -145,7 +155,6 @@ export default function Cart({ navigation }: Props) {
         </Pressable>
       </View>
 
-      {/* EMPTY CART MODAL */}
       <Modal
         visible={showEmptyAlert}
         transparent
@@ -157,7 +166,7 @@ export default function Cart({ navigation }: Props) {
             style={[
               styles.modalContainer,
               {
-                backgroundColor: hexToRgba(theme.background, 0.95),
+                backgroundColor: theme.background,
                 borderColor: theme.text,
               },
             ]}

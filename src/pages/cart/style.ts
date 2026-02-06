@@ -9,6 +9,11 @@ export const getBackgroundStyle = (bgColor: string) => ({
 
 export const styles = StyleSheet.create({
   container: { flex: 1, padding: 6 },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   flatListContent: { paddingBottom: 100 },
   generalText: {
     fontSize: 16,
@@ -90,9 +95,20 @@ export const styles = StyleSheet.create({
     width: 175,
     height: 175,
   },
-
+  emptyWrapper: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingBottom: 80,
+  },
   modalTitle: { fontSize: 18, fontWeight: "700", marginBottom: 8 },
   modalMessage: { fontSize: 16, marginBottom: 16, textAlign: "center" },
   modalButton: { paddingVertical: 10, paddingHorizontal: 24, borderRadius: 6 },
   modalButtonText: { fontWeight: "bold" },
+  emptyImageSmall: {
+    width: 120,
+    height: 120,
+    alignSelf: "center",
+  },
+
 });
