@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import { useTheme } from "../context/ThemeContext";
+import { ThemeProvider, useTheme } from "../context/ThemeContext";
 import ThemeToggleButton from "../context/ThemeToggleButton/index";
 import { Ionicons } from "@expo/vector-icons";
 import { StatusBar } from "react-native";
@@ -26,9 +26,13 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<any>();
 
 export default function AppNavigator() {
-  const { theme } = useTheme();
+  const { theme, isDark } = useTheme();
 
   return (
+    <>
+    <StatusBar barStyle={isDark ? "light-content" : "dark-content"} 
+    backgroundColor={theme.text}/>
+    
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
@@ -106,5 +110,6 @@ export default function AppNavigator() {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </>
   );
 }
